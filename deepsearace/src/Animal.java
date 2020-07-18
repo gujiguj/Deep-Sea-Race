@@ -5,15 +5,16 @@ import java.awt.Image;
 public class Animal {
 
 	private double speed;
-	private String name;
+	private String name, info;
 	private Image frame1, frame2;
 	private int posX = 0, posY = 0;
 	
-	public Animal(double speed, String name, Image frame1, Image frame2) {
+	public Animal(double speed, String name, Image frame1, Image frame2, String info) {
 		setSpeed(speed);
 		setName(name);
 		setFrame1(frame1);
 		setFrame2(frame2);
+		this.info = info;
 	}
 	
 	//setters
@@ -54,6 +55,10 @@ public class Animal {
 		return posY;
 	}
 	
+	public String getInfo() {
+		return info;
+	}
+	
 	//convert speed into a pixel speed
 	public int speedConversion() {
 		return (int) speed;
@@ -72,7 +77,7 @@ public class Animal {
 	
 	@Override
 	public Object clone() {
-		return new Animal(speed, name, frame1, frame2);
+		return new Animal(speed, name, frame1, frame2, info);
 	}
 	
 }

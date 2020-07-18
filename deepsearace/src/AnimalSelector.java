@@ -12,35 +12,91 @@ public class AnimalSelector extends JPanel {
 			"Green Sea Turtle", "Blue-Ring Octopus", "Blue Crab", "Giant Clam", 
 			"Sea Sponge", "Anemonefish"};
 	final int[] animalSpeeds = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+	final String[] animalInfo = { 
+			"Sea Anemone info here", 
+			"Great White Shark", 
+			"Beluga Whale", 
+			"Seal", 
+			"Emperor Penguin", 
+			"Marlin", 
+			"Box Jellyfish", 
+			"Green Sea Turtle", 
+			"Blue-Ring Octopus", 
+			"Blue Crab", 
+			"Giant Clam", 
+			"Sea Sponge", 
+			"Anemonefish" 
+		};
 	HashMap<String, Animal> animals;
 	
 	Animal[] selected;
 	int i = 0;
-	final JLabel selectedLabel;
+	final JLabel selectedLabel, nameLabel, infoLabel;
+	final JPanel btnPanel1, btnPanel2, infoPanel;
+	final JButton selectBtn;
 	
-	public AnimalSelector(JButton cont) {
-		this.add(cont);
-		animals = new HashMap<>();
-		addAnimalChoices();
+	public AnimalSelector(JButton cont) {	
+		this.setLayout(new BorderLayout());
 		
-		final JLabel label = new JLabel(
-				"This is where you select animals");
-		this.add(label);
+		final JPanel north = new JPanel();
+		this.add(north, BorderLayout.NORTH);
+		final JPanel south = new JPanel();
+		this.add(south, BorderLayout.SOUTH);
+		
+		final JLabel instr = new JLabel("Click on a button to learn more about the animal! \n"
+				+ "Select 2 animals to race, and click \"To Race\" to proceed.");
+		north.add(instr);
+		north.setLayout(new BoxLayout(north, BoxLayout.Y_AXIS));
+		
+		animals = new HashMap<>();
+		btnPanel1 = new JPanel();
+		btnPanel2 = new JPanel();
+		addAnimalChoices();
+		north.add(btnPanel1);
+		north.add(btnPanel2);
 		
 		selected = new Animal[2];
 		
-		selectedLabel = new JLabel();
-		this.add(selectedLabel);
+		infoPanel = new JPanel();
+		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
+		infoLabel = new JLabel();
+		nameLabel = new JLabel();
+		selectBtn = new JButton("Select this animal!");
+		selectBtn.addActionListener(e -> setAnimal(e, nameLabel.getText()));
+		nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		infoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		selectBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+		infoPanel.add(nameLabel);
+		infoPanel.add(infoLabel);
+		infoPanel.add(selectBtn);
+		
+		this.add(infoPanel, BorderLayout.CENTER);
+		infoPanel.setVisible(false);
+		
+		selectedLabel = new JLabel("Selected: None");
+		south.add(selectedLabel);
+		south.add(cont);	
 	}
 	
 	/* Creates the buttons and maps name to object */
 	private void addAnimalChoices() {
 		for (int j = 0; j < animalList.length; j++) {
-			animals.put(animalList[j], new Animal(animalSpeeds[j], animalList[j], null, null));
+			animals.put(animalList[j], new Animal(animalSpeeds[j], 
+					animalList[j], null, null, animalInfo[j]));
 			
 			final JButton btn = new JButton(animalList[j]);
-			btn.addActionListener(e -> setAnimal(e, btn.getText()));
-			this.add(btn);
+			btn.addActionListener(e -> {
+				infoPanel.setVisible(true);
+				infoLabel.setText(animals.get(btn.getText()).getInfo());
+				nameLabel.setText(btn.getText());
+			});
+			
+			if (j < animalList.length / 2) {
+				btnPanel1.add(btn);
+			} else {
+				btnPanel2.add(btn);
+			}
+			
 		}
 	}
 	
@@ -51,14 +107,14 @@ public class AnimalSelector extends JPanel {
 		if (i == 0) {
 			selected[0] = animals.get(name);
 			i++;
-			selectedLabel.setText(selected[0].toString());
+			selectedLabel.setText("Selected: " + selected[0].toString());
 		} else if (selected[1] == null) {
 			selected[1] = animals.get(name);
-			selectedLabel.setText(selected[0].toString() + ", " + selected[1].toString());
+			selectedLabel.setText("Selected: " + selected[0].toString() + ", " + selected[1].toString());
 		} else {
 			selected[1] = selected[0];
 			selected[0] = animals.get(name);
-			selectedLabel.setText(selected[0].toString() + ", " + selected[1].toString());
+			selectedLabel.setText("Selected: " + selected[0].toString() + ", " + selected[1].toString());
 		}
 	}
 	

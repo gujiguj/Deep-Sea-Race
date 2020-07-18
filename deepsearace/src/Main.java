@@ -12,50 +12,46 @@ class Main implements Runnable {
 	public void run() {
         final JFrame frame = new JFrame("Deep Sea Race");
         frame.setLocation(100, 100);
-
         
-        /* Status panel (updated by `func`) */
+
+        /* Back/forwards buttons */
+        final JButton continueToRace = new JButton("To Race");
+        final JButton continueToSelector = new JButton("To Animal Selector");
+        
+        /* Panels */
+        Instructions instrPanel = new Instructions(continueToSelector);
+        continueToSelector.addActionListener(e -> {
+	    		running = false;
+	    		instructions = false;
+	    		select = true; 
+	    		frame.dispose();
+	    		run();
+			}
+		);
+        AnimalSelector selectorPanel = new AnimalSelector(continueToRace);
+        continueToRace.addActionListener(e -> {
+	        	try {
+	        		a1 = ((AnimalSelector) selectorPanel).getSelectedAnimals()[0];
+	        		a2 = ((AnimalSelector) selectorPanel).getSelectedAnimals()[1];
+	        		running = true;
+	        		instructions = false;
+	        		select = false;
+	        		frame.dispose();
+	        		run();
+	        	} catch (IllegalArgumentException ex) { 
+	        		running = false;
+	        	} 
+			}
+		);
+    	
+    	final JPanel controlPanel = new JPanel();
+        frame.add(controlPanel, BorderLayout.NORTH);
+        
         final JPanel statusPanel = new JPanel();
         frame.add(statusPanel, BorderLayout.SOUTH);
         
         final JLabel status = new JLabel();
         statusPanel.add(status);
-        
-        /* Back/forwards buttons */
-        final JButton continueToRace = new JButton("To Race");
-        continueToRace.addActionListener(e -> {
-        		running = true;
-        		instructions = false;
-        		select = false;
-        		frame.dispose();
-        		run();
-    		}
-		);
-        
-        final JButton continueToSelector = new JButton("To Animal Selector");
-        continueToSelector.addActionListener(e -> {
-        		running = false;
-        		instructions = false;
-        		select = true; 
-        		frame.dispose();
-        		run();
-    		}
-		);
-        
-        /* Panels */
-        Instructions instrPanel = new Instructions(continueToSelector);
-        AnimalSelector selectorPanel = new AnimalSelector(continueToRace);
-    	continueToRace.addActionListener(e -> {
-    		try {
-        		a1 = ((AnimalSelector) selectorPanel).getSelectedAnimals()[0];
-        		a2 = ((AnimalSelector) selectorPanel).getSelectedAnimals()[1];
-        	} catch (IllegalArgumentException ex) { 
-        		running = false;
-        	} 
-    	});	
-    	
-    	final JPanel controlPanel = new JPanel();
-        frame.add(controlPanel, BorderLayout.NORTH);
         
         /* Changing main area */
         JPanel main = instrPanel;
