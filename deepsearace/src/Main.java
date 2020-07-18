@@ -6,12 +6,14 @@ import javax.swing.*;
 class Main implements Runnable {
 
 	boolean instructions = true, select = false, running = false;
+	Animal a1, a2;
 	
 	@Override
 	public void run() {
         final JFrame frame = new JFrame("Deep Sea Race");
         frame.setLocation(100, 100);
 
+        
         /* Status panel (updated by `func`) */
         final JPanel statusPanel = new JPanel();
         frame.add(statusPanel, BorderLayout.SOUTH);
@@ -20,57 +22,64 @@ class Main implements Runnable {
         statusPanel.add(status);
         
         /* Back/forwards buttons */
-        JButton continueToRace = new JButton("To Race");
+        final JButton continueToRace = new JButton("To Race");
         continueToRace.addActionListener(e -> {
         		running = true;
         		instructions = false;
         		select = false;
+        		frame.dispose();
         		run();
     		}
 		);
         
-        JButton continueToSelector = new JButton("To Animal Selector");
+        final JButton continueToSelector = new JButton("To Animal Selector");
         continueToSelector.addActionListener(e -> {
         		running = false;
         		instructions = false;
-        		select = true;
+        		select = true; 
+        		frame.dispose();
         		run();
     		}
 		);
         
-        /* Main racing area */
-        Animal a1 = new Animal(5, "Octopus", null, null);
-        Animal a2 = new Animal(10, "Squid", null, null);
+        /* Panels */
+        Instructions instrPanel = new Instructions(continueToSelector);
+        AnimalSelector selectorPanel = new AnimalSelector(continueToRace);
+    	continueToRace.addActionListener(e -> {
+    		try {
+        		a1 = ((AnimalSelector) selectorPanel).getSelectedAnimals()[0];
+        		a2 = ((AnimalSelector) selectorPanel).getSelectedAnimals()[1];
+        	} catch (IllegalArgumentException ex) { 
+        		running = false;
+        	} 
+    	});	
+    	
+    	final JPanel controlPanel = new JPanel();
+        frame.add(controlPanel, BorderLayout.NORTH);
         
-        final JPanel control_panel = new JPanel();
-        frame.add(control_panel, BorderLayout.NORTH);
-        
-        JPanel main = new Instructions(continueToSelector);
+        /* Changing main area */
+        JPanel main = instrPanel;
         if (instructions) {
-        	main = new Instructions(continueToSelector);
+        	main = instrPanel;
         } else if (select) {
-        	main = new AnimalSelector(continueToRace);
+        	main = selectorPanel;
 		} else {
-        	main = new Functions(a1, a2, status, continueToSelector);
-        	Functions func = (Functions) main;
-            control_panel.add(continueToSelector);
+			Functions funcPanel = new Functions(a1, a2, status, continueToSelector);
+        	
+			controlPanel.add(continueToSelector);
         	
         	final JButton reset = new JButton("Reset");
-            reset.addActionListener(e -> func.reset());
-            control_panel.add(reset);
+            reset.addActionListener(e -> funcPanel.reset());
+            controlPanel.add(reset);
 
             final JButton start = new JButton("Start");
-            start.addActionListener(e -> func.start());
-            control_panel.add(start);
+            start.addActionListener(e -> funcPanel.start());
+            controlPanel.add(start);
+            main = funcPanel;
         }
 
         frame.add(main, BorderLayout.CENTER);
 
-        /* Control panel with reset and start buttons */
-        
-
-        
-        
         /* Put frame on screen */
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

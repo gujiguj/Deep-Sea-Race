@@ -65,4 +65,14 @@ public class Animal {
 		g.fillOval(posX, posY, 25, 25);
 	}
 	
+	@Override
+	public String toString() {
+		return name;
+	}
+	
+	@Override
+	public Object clone() {
+		return new Animal(speed, name, frame1, frame2);
+	}
+	
 }
