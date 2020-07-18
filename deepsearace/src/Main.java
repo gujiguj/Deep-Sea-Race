@@ -1,5 +1,17 @@
-class Main {
-	public static void main(String[] args) {
-		System.out.println("Does this work? owo");
+
+import javax.swing.SwingUtilities;
+
+/* Draw everything, run to interact */
+class Main implements Runnable {
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
+	
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(new Main());
+	}
+		
 }
