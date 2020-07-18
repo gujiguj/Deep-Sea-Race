@@ -3,12 +3,12 @@ import java.awt.Image;
 
 public class Animal {
 
-	int speed;
+	double speed;
 	String name;
 	Image frame1, frame2;
 	int posX, posY;
 	
-	public Animal(int speed, String name, Image frame1, Image frame2) {
+	public Animal(double speed, String name, Image frame1, Image frame2) {
 		
 	}
 	
