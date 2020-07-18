@@ -26,10 +26,10 @@ public class Functions extends JPanel {
 		this.a1 = a1;
 		this.a2 = a2;
 		
-		a1.posY = A1_INIT_Y;
-		a2.posY = A2_INIT_Y;
-		a1.posX = INIT_X;
-		a2.posX = INIT_X;
+		a1.setPosY(A1_INIT_Y);
+		a2.setPosY(A2_INIT_Y);
+		a1.setPosX(INIT_X);
+		a2.setPosX(INIT_X);
 		 
 		this.status = status;
 		status.setText("Ready to start!");
@@ -41,8 +41,8 @@ public class Functions extends JPanel {
 	/* Resets animal position to initial if not running */
 	public void reset() {
 		if (!running) {
-			a1.posX = INIT_X;
-			a2.posX = INIT_X;
+			a1.setPosX(INIT_X);
+			a2.setPosX(INIT_X);
 			repaint();
 			status.setText("Ready to start!");
 		}
@@ -60,18 +60,18 @@ public class Functions extends JPanel {
 	 * 
 	 * Moves animals if not at the end of the screen, stops and displays winner otherwise */
 	private void tick() { 
-		if (running && a1.posX < screenSize.width - 10 && a2.posX < screenSize.width - 10) {
-			a1.posX += a1.speedConversion();
-			a2.posX += a2.speedConversion();
+		if (running && a1.getPosX() < screenSize.width - 10 && a2.getPosX() < screenSize.width - 10) {
+			a1.setPosX(a1.getPosX() + a1.speedConversion());
+			a2.setPosX(a2.getPosX() + a2.speedConversion());
 			repaint();
 		} else {
 			running = false;
 			timer.stop();
 			
-			if (a1.posX  >= screenSize.width - 10) {
-				status.setText(a1.name + " wins!");
-			} else if (a2.posX  >= screenSize.width - 10) {
-				status.setText(a2.name + " wins!");
+			if (a1.getPosX()  >= screenSize.width - 10) {
+				status.setText(a1.getName() + " wins!");
+			} else if (a2.getPosX()  >= screenSize.width - 10) {
+				status.setText(a2.getName() + " wins!");
 			} else {
 				status.setText("It's a draw!");
 			}

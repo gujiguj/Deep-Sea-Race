@@ -4,14 +4,54 @@ import java.awt.Image;
 
 public class Animal {
 
-	double speed;
-	String name;
-	Image frame1, frame2;
-	int posX = 0, posY = 0;
+	private double speed;
+	private String name;
+	private Image frame1, frame2;
+	private int posX = 0, posY = 0;
 	
 	public Animal(double speed, String name, Image frame1, Image frame2) {
-		this.speed = speed;
-		this.name = name;
+		setSpeed(speed);
+		setName(name);
+		setFrame1(frame1);
+		setFrame2(frame2);
+	}
+	
+	//setters
+	public void setSpeed(double s) {
+		this.speed = s;
+	}
+	
+	public void setName (String n) {
+		this.name = n;
+	}
+	
+	public void setPosX (int x) {
+		this.posX = x;
+	}
+	
+	public void setPosY (int y) {
+		this.posY = y;
+	}
+	
+	public void setFrame1(Image frame) {
+		this.frame1 = frame;
+	}
+	
+	public void setFrame2(Image frame) {
+		this.frame2 = frame;
+	}
+	
+	//getters
+	public String getName() {
+		return name;
+	}
+	
+	public int getPosX() {
+		return posX;
+	}
+	
+	public int getPosY() {
+		return posY;
 	}
 	
 	//convert speed into a pixel speed
