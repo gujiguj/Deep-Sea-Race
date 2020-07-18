@@ -17,7 +17,7 @@ class Main implements Runnable {
         final JLabel status = new JLabel();
         statusPanel.add(status);
         
-        /* Main area */
+        /* Main racing area */
         Animal a1 = new Animal(5, "Octopus", null, null);
         Animal a2 = new Animal(10, "Squid", null, null);
         
@@ -33,7 +33,7 @@ class Main implements Runnable {
         control_panel.add(reset);
 
         final JButton start = new JButton("Start");
-        reset.addActionListener(e -> func.start());
+        start.addActionListener(e -> func.start());
         control_panel.add(start);
         
         /* Put frame on screen */

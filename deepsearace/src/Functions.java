@@ -1,8 +1,9 @@
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.util.Arrays;
 
 import javax.swing.*;
 import java.awt.*;
-import javax.swing.Timer;
 
 /* Holds all the logic */
 @SuppressWarnings("serial")
@@ -16,7 +17,7 @@ public class Functions extends JPanel {
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	
 	JLabel status;
-	Timer timer;
+	final Timer timer = new Timer(INTERVAL, e -> tick());
 	
 	private boolean running;
 	
@@ -34,39 +35,39 @@ public class Functions extends JPanel {
 		this.status = status;
 		status.setText("Ready to start!");
 		
-		timer = new Timer(INTERVAL, e -> tick());
-		timer.start();
-		
 		running = false;
 	}
 	
+	/* Resets animal position to initial if not running */
 	public void reset() {
-		if (running) {
-			timer.stop();
+		if (!running) {
+			a1.posX = INIT_X;
+			a2.posX = INIT_X;
+			repaint();
+			status.setText("Ready to start!");
 		}
-		
-		a1.posX = INIT_X;
-		a2.posX = INIT_X;
-		status.setText("Ready to start!");
 	}
 	
+	/* Starts the timer so animals move */
 	public void start() {
-		if (!running) {
-			running = true;
-			timer.start();
-		} 
-		
+		reset();
+		timer.restart();
+		running = true;
 		status.setText("Running...");
 	}
 	
+	/* Called every 35ms by timer.
+	 * 
+	 * Moves animals if not at the end of the screen, stops and displays winner otherwise */
 	private void tick() { 
-		if (a1.posX < screenSize.width - 10 && a2.posX < screenSize.width - 10) {
+		if (running && a1.posX < screenSize.width - 10 && a2.posX < screenSize.width - 10) {
 			a1.posX += a1.speedConversion();
 			a2.posX += a2.speedConversion();
 			repaint();
 		} else {
-			timer.stop();
 			running = false;
+			timer.stop();
+			
 			if (a1.posX  >= screenSize.width - 10) {
 				status.setText(a1.name + " wins!");
 			} else if (a2.posX  >= screenSize.width - 10) {
