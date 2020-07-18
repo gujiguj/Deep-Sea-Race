@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.awt.Image;
 
 public class Animal {
@@ -17,7 +18,7 @@ public class Animal {
 	}
 	
 	//render graphics (i'm assuming this will use swing?)
-	public void draw() { 
+	public void draw(Graphics g) { 
 		
 	}
 	
