@@ -1,6 +1,4 @@
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.util.Arrays;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,11 +15,12 @@ public class Functions extends JPanel {
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	
 	JLabel status;
+	JButton back;
 	final Timer timer = new Timer(INTERVAL, e -> tick());
 	
 	private boolean running;
 	
-	public Functions(Animal a1, Animal a2, JLabel status) {
+	public Functions(Animal a1, Animal a2, JLabel status, JButton back) {
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		
 		this.a1 = a1;
@@ -35,6 +34,7 @@ public class Functions extends JPanel {
 		this.status = status;
 		status.setText("Ready to start!");
 		
+		this.back = back;
 		running = false;
 	}
 	
