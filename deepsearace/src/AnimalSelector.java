@@ -11,7 +11,7 @@ public class AnimalSelector extends JPanel {
 			"Beluga Whale", "Harbor Seal", "Emperor Penguin", "Blue Marlin", "Box Jellyfish", 
 			"Green Sea Turtle", "Blue-Ring Octopus", "Blue Crab", "Giant Clam", 
 			"Sea Sponge", "Anemonefish"};
-	final int[] animalSpeeds = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+	final int[] animalSpeeds = {1, 16, 8, 8, 3, 30, 2, 16, 11, 1, 0, 0, 1};
 	final String[] animalInfo = { 
 			"An anemone might look like a flower, it is really an animal! Anemones are in the same class as other animals such as coral. They are brightly colored and live in warm water, and they eat fish.", 
 			"Great White Sharks are in class Chondrichthyes, meaning that they are bony fish. They are the largest predatory fish on Earth, at around 15 feet and up to 5000 pounds. They are gray and blend in with the sea floor, and they swim very fast.", 
