@@ -1,5 +1,8 @@
 import java.awt.Color;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 
@@ -98,6 +101,14 @@ public class Functions extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		Image bg;
+		try {
+			bg = ImageIO.read(new File("src/files/darksea.jpg"));
+			g.drawImage(bg, 0, 0, null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		a1.draw(g);
 		a2.draw(g);
 	} 
