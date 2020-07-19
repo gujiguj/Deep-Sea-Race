@@ -11,7 +11,7 @@ public class AnimalSelector extends JPanel {
 			"Beluga Whale", "Harbor Seal", "Emperor Penguin", "Marlin", "Box Jellyfish", 
 			"Green Sea Turtle", "Blue-Ringed Octopus", "Blue Crab", "Giant Clam", 
 			"Sea Sponge", "Anemonefish"};
-	final int[] animalSpeeds = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+	final int[] animalSpeeds = {1, 16, 8, 8, 3, 30, 2, 16, 11, 1, 0, 0, 1};
 	final String[] animalInfo = { 
 			"Sea Anemone info here", 
 			"Great White Shark", 
