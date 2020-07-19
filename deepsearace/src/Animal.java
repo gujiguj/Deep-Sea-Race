@@ -1,19 +1,29 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 
-public class Animal {
+import javax.imageio.ImageIO;
+
+public class Animal{
 
 	private double speed;
 	private String name, info;
+	private Image curFrame;
 	private Image frame1, frame2;
+	private String frameName1, frameName2;
 	private int posX = 0, posY = 0;
+	final String imgPath = "src/files/";
 	
-	public Animal(double speed, String name, Image frame1, Image frame2, String info) {
+	public Animal(double speed, String name, String frame1, String frame2, String info) {
 		setSpeed(speed);
 		setName(name);
 		setFrame1(frame1);
 		setFrame2(frame2);
+		curFrame = this.frame1;
+		this.frameName1 = frame1;
+		this.frameName2 = frame2;
 		this.info = info;
 	}
 	
@@ -34,12 +44,26 @@ public class Animal {
 		this.posY = y;
 	}
 	
-	public void setFrame1(Image frame) {
-		this.frame1 = frame;
+	public void setFrame1(String frameName) {
+		Image i;
+		try {
+			i = ImageIO.read(new File(imgPath + frameName));
+			this.frame1 = i;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	public void setFrame2(Image frame) {
-		this.frame2 = frame;
+	public void setFrame2(String frameName) {
+		Image i;
+		try {
+			i = ImageIO.read(new File(imgPath + frameName));
+			this.frame2 = i;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	//getters
@@ -59,15 +83,33 @@ public class Animal {
 		return info;
 	}
 	
+	public Image getFrame1() {
+		return frame1;
+	}
+	
+	public Image getFrame2() {
+		return frame2;
+	}
+	
 	//convert speed into a pixel speed
 	public int speedConversion() {
 		return (int) speed;
 	}
 	
+	//change curFrame
+	public void changeFrame() {
+		if (curFrame == frame1) {
+			curFrame = frame2;
+		} else {
+			curFrame = frame1;
+		}
+	}
+	
 	//render graphics (i'm assuming this will use swing?)
 	public void draw(Graphics g) { 
-		g.setColor(Color.BLUE);
-		g.fillOval(posX, posY, 25, 25);
+		//g.setColor(Color.BLUE);
+		//g.fillOval(posX, posY, 25, 25);
+		g.drawImage(curFrame, posX, posY, null);
 	}
 	
 	@Override
@@ -77,7 +119,7 @@ public class Animal {
 	
 	@Override
 	public Object clone() {
-		return new Animal(speed, name, frame1, frame2, info);
+		return new Animal(speed, name, frameName1, frameName2, info);
 	}
 	
 }

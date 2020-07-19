@@ -8,25 +8,53 @@ public class AnimalSelector extends JPanel {
 	
 	/* List of animals and speeds such that list[j] corresponds to speeds[j] */
 	final String[] animalList = {"Sea Anemone", "Great White Shark", 
-			"Beluga Whale", "Seal", "Emperor Penguin", "Marlin", "Box Jellyfish", 
-			"Green Sea Turtle", "Blue-Ring Octopus", "Blue Crab", "Giant Clam", 
+			"Beluga Whale", "Harbor Seal", "Emperor Penguin", "Marlin", "Box Jellyfish", 
+			"Green Sea Turtle", "Blue-Ringed Octopus", "Blue Crab", "Giant Clam", 
 			"Sea Sponge", "Anemonefish"};
 	final int[] animalSpeeds = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
 	final String[] animalInfo = { 
 			"Sea Anemone info here", 
 			"Great White Shark", 
 			"Beluga Whale", 
-			"Seal", 
+			"Harbor Seal", 
 			"Emperor Penguin", 
 			"Marlin", 
 			"Box Jellyfish", 
 			"Green Sea Turtle", 
-			"Blue-Ring Octopus", 
+			"Blue-Ringed Octopus", 
 			"Blue Crab", 
 			"Giant Clam", 
 			"Sea Sponge", 
 			"Anemonefish" 
-		};
+		}; //i... don't know how to make this better.
+	final String[] seaAnemone = {"sea anemone1.png", "sea anemone2.png"};
+	final String[] greatWhiteShark = {"great white shark1.png", "great white shark2.png"};
+	final String[] belugaWhale = {"beluga whale1.png", "beluga whale2.png"};
+	final String[] harborSeal = {"harbor seal1.png", "harbor seal2.png"};
+	final String[] emperorPenguin = {"emperor penguin1.png", "emperor penguin2.png"};
+	final String[] marlin = {"marlin1.png", "marlin2.png"};
+	final String[] boxJellyfish = {"box jellyfish1.png", "box jellyfish2.png"};
+	final String[] greenSeaTurtle = {"green sea turtle1.png", "green sea turtle2.png"};
+	final String[] blueRingedOctopus = {"blue-ringed octopus1.png", "blue-ringed octopus2.png"};
+	final String[] blueCrab = {"blue crab1.png", "blue crab2.png"};
+	final String[] giantClam = {"giant clam1.png", "giant clam2.png"};
+	final String[] seaSponge = {"sea sponge1.png", "sea sponge2.png"};
+	final String[] anemonefish = {"anemonefish1.png", "anemonefish2.png"};
+	final String[][] animalImages = {
+			seaAnemone, 
+			greatWhiteShark, 
+			belugaWhale, 
+			harborSeal, 
+			emperorPenguin, 
+			marlin, 
+			boxJellyfish,
+			greenSeaTurtle,
+			blueRingedOctopus,
+			blueCrab,
+			giantClam,
+			seaSponge,
+			anemonefish
+	};
 	HashMap<String, Animal> animals;
 	
 	Animal[] selected;
@@ -82,7 +110,7 @@ public class AnimalSelector extends JPanel {
 	private void addAnimalChoices() {
 		for (int j = 0; j < animalList.length; j++) {
 			animals.put(animalList[j], new Animal(animalSpeeds[j], 
-					animalList[j], null, null, animalInfo[j]));
+					animalList[j], animalImages[j][0], animalImages[j][1], animalInfo[j]));
 			
 			final JButton btn = new JButton(animalList[j]);
 			btn.addActionListener(e -> {
