@@ -10,7 +10,7 @@ class Main implements Runnable {
 	
 	@Override
 	public void run() {
-        final JFrame frame = new JFrame("Deep Sea Race");
+        final JFrame frame = new JFrame("Explore the Ocean!");
         frame.setLocation(100, 100);
         
 

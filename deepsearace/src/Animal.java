@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -89,6 +88,14 @@ public class Animal{
 	
 	public Image getFrame2() {
 		return frame2;
+	}
+	
+	public String getFrameName1() {
+		return frameName1;
+	}
+	
+	public String getFrameName2() {
+		return frameName2;
 	}
 	
 	//convert speed into a pixel speed

@@ -60,7 +60,7 @@ public class AnimalSelector extends JPanel {
 	
 	Animal[] selected;
 	int i = 0;
-	final JLabel selectedLabel, nameLabel, infoLabel;
+	final JLabel selectedLabel, nameLabel, infoLabel, img;
 	final JPanel btnPanel1, btnPanel2, infoPanel;
 	final JButton selectBtn;
 	
@@ -74,8 +74,12 @@ public class AnimalSelector extends JPanel {
 		
 		north.setLayout(new BoxLayout(north, BoxLayout.Y_AXIS));
 		final JLabel instr = new JLabel(
-				"<html>There are 228,450 known species of animals that live in the ocean, and there could be about 2 millions more that we don't know about! Below are just a few. <br> Click on a button to learn more about the animal! Select 2 animals to race, and click \"To Race\" to proceed.</html>");
-		north.add(instr);
+				"<html>There are 228,450 known species of animals that live in the ocean, "
+				+ "and there could be about 2 millions more that we don't know about! "
+				+ "Below are just a few. <br><br>Click on a button to learn more about the animal! "
+				+ "Select 2 animals to race, and click \"To Race\" to proceed.<br></html>", SwingConstants.CENTER);
+		instr.setAlignmentX(CENTER_ALIGNMENT);
+		north.add(instr, 0);
 		
 		
 		animals = new HashMap<>();
@@ -91,16 +95,19 @@ public class AnimalSelector extends JPanel {
 		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
 		infoLabel = new JLabel();
 		nameLabel = new JLabel();
+		img = new JLabel();
 		selectBtn = new JButton("Select this animal!");
 		selectBtn.addActionListener(e -> setAnimal(e, nameLabel.getText()));
 		nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		infoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		selectBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+		img.setAlignmentY(Component.CENTER_ALIGNMENT);
 		infoPanel.add(nameLabel);
 		infoPanel.add(infoLabel);
 		infoLabel.setBorder(BorderFactory.createEmptyBorder(25, 0, 25, 0));
+		infoPanel.add(img);
 		infoPanel.add(selectBtn);
-		infoPanel.setBorder(BorderFactory.createEmptyBorder(50, 200, 50, 200));
+		infoPanel.setBorder(BorderFactory.createEmptyBorder(25, 200, 25, 200));
 		
 		this.add(infoPanel, BorderLayout.CENTER);
 		infoPanel.setVisible(false);
@@ -113,14 +120,16 @@ public class AnimalSelector extends JPanel {
 	/* Creates the buttons and maps name to object */
 	private void addAnimalChoices() {
 		for (int j = 0; j < animalList.length; j++) {
-			animals.put(animalList[j], new Animal(animalSpeeds[j], 
-					animalList[j], animalImages[j][0], animalImages[j][1], animalInfo[j]));
+			Animal a = new Animal(animalSpeeds[j], 
+					animalList[j], animalImages[j][0], animalImages[j][1], animalInfo[j]);
+			animals.put(animalList[j], a);			
 			
 			final JButton btn = new JButton(animalList[j]);
 			btn.addActionListener(e -> {
 				infoPanel.setVisible(true);
 				infoLabel.setText("<html>" + animals.get(btn.getText()).getInfo() + "</html>");
 				nameLabel.setText("<html><h1>" + btn.getText() + "</h1></html>");
+				img.setIcon(new ImageIcon("src/files/" + animals.get(btn.getText()).getFrameName1()));
 			});
 			
 			if (j < animalList.length / 2) {
