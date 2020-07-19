@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.*;
 import java.awt.*;
@@ -63,7 +64,14 @@ public class Functions extends JPanel {
 	 * 
 	 * Moves animals if not at the end of the screen, stops and displays winner otherwise */
 	private void tick() { 
-		if (running && a1.getPosX() < screenSize.width - 10 && a2.getPosX() < screenSize.width - 10) {
+		if (running && a1.speedConversion() == 0 && a2.speedConversion() == 0) {
+			try {
+				TimeUnit.SECONDS.sleep(3);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			running = false;
+		} else if (running && a1.getPosX() < screenSize.width - 10 && a2.getPosX() < screenSize.width - 10) {
 			a1.setPosX(a1.getPosX() + a1.speedConversion());
 			a2.setPosX(a2.getPosX() + a2.speedConversion());
 			repaint();
@@ -71,7 +79,9 @@ public class Functions extends JPanel {
 			running = false;
 			timer.stop();
 			
-			if (a1.getPosX()  >= screenSize.width - 10) {
+			if (a1.speedConversion() == 0 && a2.speedConversion() == 0) {
+				status.setText("Doesn't look like these two are going to move today...");
+			} else if (a1.getPosX()  >= screenSize.width - 10) {
 				status.setText(a1.getName() + " wins!");
 			} else if (a2.getPosX()  >= screenSize.width - 10) {
 				status.setText(a2.getName() + " wins!");
