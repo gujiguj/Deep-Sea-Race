@@ -29,5 +29,5 @@ Sea sponge 0 m/s
 Anemonefish 0.07 m/s  
 
 ## Sources
-Animal graphics created by Lucy
-Animal information from [National Geographic]("https://www.nationalgeographic.com")
+Animal graphics created by Lucy  
+Animal information from [National Geographic](https://www.nationalgeographic.com)
