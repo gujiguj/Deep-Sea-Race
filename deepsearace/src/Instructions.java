@@ -1,26 +1,33 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 
 @SuppressWarnings("serial")
 public class Instructions extends JPanel {
-	Image bg;
 	
 	public Instructions(JButton cont) {
-		try {
-			bg = ImageIO.read(new File("/Users/ayang19/Documents/Programming/Deep-Sea-Race/deepsearace/files/front.png"));
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		this.setLayout(new BorderLayout());
-		this.add(cont, BorderLayout.SOUTH);
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		
+		final JLabel title = new JLabel("<html><h1>Deep Sea Race</h1></html>", SwingConstants.CENTER);
+		this.add(title);
+		
+		final JLabel about = new JLabel(
+				"<html><h3>Learn about different sea creatures, and see how fast they move in a race!</h3></html>", 
+				SwingConstants.CENTER);
+		this.add(about);
+		
+		final JLabel about2 = new JLabel("<html><h3>Click the button to try it out!</h3></html>", SwingConstants.CENTER);
+		this.add(about2);
+		
+		this.add(cont);
 	}
 	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(bg, 0, 0, null);
+		g.setColor(Color.WHITE);
+		g.setFont(new javax.swing.plaf.FontUIResource("Sans serif",Font.PLAIN,12));
+		g.setColor(Color.CYAN);
+		g.fillRect(0, 0, Functions.WIDTH, Functions.HEIGHT);
 	}
 	
 	@Override
