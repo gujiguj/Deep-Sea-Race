@@ -9,6 +9,7 @@ public class Functions extends JPanel {
 	private Animal a1, a2;
 	
 	public static final int INTERVAL = 35; 
+	public static final int FRAMERATE = 1000;
 	public static final int A1_INIT_Y = 100, A2_INIT_Y = 300, INIT_X = 25;
 	public static final int WIDTH = 2500, HEIGHT = 500;
 	
@@ -17,6 +18,7 @@ public class Functions extends JPanel {
 	JLabel status;
 	JButton back;
 	final Timer timer = new Timer(INTERVAL, e -> tick());
+	final Timer animationTimer = new Timer(FRAMERATE, e -> shift());
 	
 	private boolean running;
 	
@@ -52,6 +54,7 @@ public class Functions extends JPanel {
 	public void start() {
 		reset();
 		timer.restart();
+		animationTimer.restart();
 		running = true;
 		status.setText("Running...");
 	}
@@ -75,6 +78,19 @@ public class Functions extends JPanel {
 			} else {
 				status.setText("It's a draw!");
 			}
+		}
+		
+	}
+	
+	//Called every 1s by timer. "Animates" the animal. (2 frame animation)
+	private void shift() { 
+		if (running) {
+			a1.changeFrame();
+			a2.changeFrame();
+			repaint();
+		} else {
+			running = false;
+			animationTimer.stop();
 		}
 		
 	}

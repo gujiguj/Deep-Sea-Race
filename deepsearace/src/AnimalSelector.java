@@ -27,6 +27,35 @@ public class AnimalSelector extends JPanel {
 			"Sea Sponges are the least complex animal. They don't have tissues, organs, or a central nervous system. They don't usually move. Their cell walls completely cover the body and are dominated by small pores.", 
 			"Anemonefish (also called Clownfish) are about 4.3 inches long. They live in sea anemone in warm, tropical waters, since they are adapted be immune to the anemone's sting. In exchange for a place to live, the clownfish drives off intruders and eats the anemone's parasites." 
 		};
+	final String[] seaAnemone = {"sea anemone1.png", "sea anemone2.png"};
+	final String[] greatWhiteShark = {"great white shark1.png", "great white shark2.png"};
+	final String[] belugaWhale = {"beluga whale1.png", "beluga whale2.png"};
+	final String[] harborSeal = {"harbor seal1.png", "harbor seal2.png"};
+	final String[] emperorPenguin = {"emperor penguin1.png", "emperor penguin2.png"};
+	final String[] marlin = {"marlin1.png", "marlin2.png"};
+	final String[] boxJellyfish = {"box jellyfish1.png", "box jellyfish2.png"};
+	final String[] greenSeaTurtle = {"green sea turtle1.png", "green sea turtle2.png"};
+	final String[] blueRingedOctopus = {"blue-ringed octopus1.png", "blue-ringed octopus2.png"};
+	final String[] blueCrab = {"blue crab1.png", "blue crab2.png"};
+	final String[] giantClam = {"giant clam1.png", "giant clam2.png"};
+	final String[] seaSponge = {"sea sponge1.png", "sea sponge2.png"};
+	final String[] anemonefish = {"anemonefish1.png", "anemonefish2.png"};
+	final String[][] animalImages = {
+			seaAnemone, 
+			greatWhiteShark, 
+			belugaWhale, 
+			harborSeal, 
+			emperorPenguin, 
+			marlin, 
+			boxJellyfish,
+			greenSeaTurtle,
+			blueRingedOctopus,
+			blueCrab,
+			giantClam,
+			seaSponge,
+			anemonefish
+	};
+
 	HashMap<String, Animal> animals;
 	
 	Animal[] selected;
@@ -85,7 +114,7 @@ public class AnimalSelector extends JPanel {
 	private void addAnimalChoices() {
 		for (int j = 0; j < animalList.length; j++) {
 			animals.put(animalList[j], new Animal(animalSpeeds[j], 
-					animalList[j], null, null, animalInfo[j]));
+					animalList[j], animalImages[j][0], animalImages[j][1], animalInfo[j]));
 			
 			final JButton btn = new JButton(animalList[j]);
 			btn.addActionListener(e -> {
