@@ -43,7 +43,6 @@ public class AnimalSelector extends JPanel {
 		final JPanel south = new JPanel();
 		this.add(south, BorderLayout.SOUTH);
 		
-		//north.setAlignmentX(Component.LEFT_ALIGNMENT);
 		north.setLayout(new BoxLayout(north, BoxLayout.Y_AXIS));
 		final JLabel instr = new JLabel(
 				"<html>There are 228,450 known species of animals that live in the ocean, and there could be about 2 millions more that we don't know about! Below are just a few. <br> Click on a button to learn more about the animal! Select 2 animals to race, and click \"To Race\" to proceed.</html>");
